@@ -105,7 +105,8 @@ router.post("/deleteTasks", userAuth, async (req, res) => {
 
 
 router.post("/addNewTask",userAuth,async(req,res)=>{
-    const {userId} = req.user;
+    try{
+        const {userId} = req.user;
     const {taskTitle, priority, status,startDate,endDate} = req.body
 
     const totalTime = new Date(endDate).getTime() - new Date(startDate).getTime();
@@ -127,6 +128,10 @@ router.post("/addNewTask",userAuth,async(req,res)=>{
         message:"success",
         data:updatedUser
     })
+    }catch(err){
+        
+    }
+    
 })
 
 router.post("/updateUserTask", userAuth, async (req, res) => {
